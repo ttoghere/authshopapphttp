@@ -1,4 +1,5 @@
 import 'package:authshopapphttp/providers/cart.dart';
+import 'package:authshopapphttp/screens/cart/cart_screen.dart';
 import 'package:authshopapphttp/screens/home/widgets/badge.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ enum FilterOptions {
 }
 
 class ProductsOverview extends StatefulWidget {
+  static const routeName = "/pos";
   ProductsOverview({Key? key}) : super(key: key);
 
   @override
@@ -53,13 +55,17 @@ class _ProductsOverviewState extends State<ProductsOverview> {
                   ),
                 ]),
           ),
-          Badge(
-            child: IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {},
+          Consumer<Cart>(
+            builder: (context, value, child) => Badge(
+              child: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                },
+              ),
+              value: cartProvider.itemCount.toString(),
+              color: Colors.red[900]!,
             ),
-            value: cartProvider.itemCount.toString(),
-            color: Colors.red[900]!,
           ),
         ],
       ),
