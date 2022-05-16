@@ -1,16 +1,23 @@
-import 'package:authshopapphttp/providers/product.dart';
-import 'package:authshopapphttp/screens/home/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:authshopapphttp/providers/product.dart';
+import 'package:authshopapphttp/screens/home/widgets/product_item.dart';
 
 enum FilterOptions {
   Favorites,
   ShowAll,
 }
 
-class ProductsOverview extends StatelessWidget {
+class ProductsOverview extends StatefulWidget {
   ProductsOverview({Key? key}) : super(key: key);
 
+  @override
+  State<ProductsOverview> createState() => _ProductsOverviewState();
+}
+
+class _ProductsOverviewState extends State<ProductsOverview> {
+  var _showOnlyFavs = false;
   @override
   Widget build(BuildContext context) {
     var productsProvider = Provider.of<Products>(context);
@@ -23,9 +30,13 @@ class ProductsOverview extends StatelessWidget {
           PopupMenuButton(
             onSelected: (value) {
               if (value == FilterOptions.Favorites) {
-                productsProvider.favStatus();
+                setState(() {
+                  _showOnlyFavs = true;
+                });
               } else if (value == FilterOptions.ShowAll) {
-                productsProvider.showAllStatus();
+                setState(() {
+                  _showOnlyFavs = false;
+                });
               }
             },
             icon: Icon(Icons.more_vert_outlined),
@@ -56,7 +67,9 @@ class ProductsOverview extends StatelessWidget {
             1.0,
           ]),
         ),
-        child: ProductsGrid(),
+        child: ProductsGrid(
+          showOnlyFavs: _showOnlyFavs,
+        ),
       ),
     );
   }
@@ -86,10 +99,16 @@ class BgGradient extends StatelessWidget {
 }
 
 class ProductsGrid extends StatelessWidget {
+  final bool showOnlyFavs;
+  const ProductsGrid({
+    Key? key,
+    required this.showOnlyFavs,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var products = Provider.of<Products>(context);
-    var productList = products.items;
+    var productList = showOnlyFavs ? products.favoriteItems : products.items;
     return GridView.builder(
       itemCount: productList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
