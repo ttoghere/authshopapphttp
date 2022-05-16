@@ -13,6 +13,29 @@ class ProductsDetail extends StatelessWidget {
       appBar: AppBar(
         title: Text(prodData.title),
       ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.network(
+            prodData.imageUrl,
+            fit: BoxFit.cover,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            prodData.title,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(prodData.description),
+          SizedBox(
+            height: 20,
+          ),
+          Text(prodData.price.toString()),
+        ],
+      ),
     );
   }
 }
