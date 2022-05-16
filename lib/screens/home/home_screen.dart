@@ -1,3 +1,5 @@
+import 'package:authshopapphttp/providers/cart.dart';
+import 'package:authshopapphttp/screens/home/widgets/badge.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +22,7 @@ class _ProductsOverviewState extends State<ProductsOverview> {
   var _showOnlyFavs = false;
   @override
   Widget build(BuildContext context) {
-    var productsProvider = Provider.of<Products>(context);
+    var cartProvider = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -50,7 +52,15 @@ class _ProductsOverviewState extends State<ProductsOverview> {
                     value: FilterOptions.ShowAll,
                   ),
                 ]),
-          )
+          ),
+          Badge(
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {},
+            ),
+            value: cartProvider.itemCount.toString(),
+            color: Colors.red[900]!,
+          ),
         ],
       ),
       body: Container(

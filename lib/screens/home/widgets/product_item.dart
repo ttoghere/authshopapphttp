@@ -1,3 +1,4 @@
+import 'package:authshopapphttp/providers/cart.dart';
 import 'package:authshopapphttp/providers/product.dart';
 import 'package:authshopapphttp/screens/detail/products_detail.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +39,17 @@ class ProductItem extends StatelessWidget {
               },
             ),
           ),
-          trailing: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart_outlined),
+          trailing: Consumer<Cart>(
+            builder: (context, cart, child) => IconButton(
+              onPressed: () {
+                cart.addItem(
+                  productId: productBp.id,
+                  price: productBp.price,
+                  title: productBp.title,
+                );
+              },
+              icon: Icon(Icons.shopping_cart_outlined),
+            ),
           ),
           backgroundColor: Colors.black54,
           title: Text(
