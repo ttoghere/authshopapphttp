@@ -1,4 +1,6 @@
 import 'package:authshopapphttp/screens/cart/cart_screen.dart';
+import 'package:authshopapphttp/screens/edit/edit_product.dart';
+import 'package:authshopapphttp/screens/edit/product_list.dart';
 import 'package:authshopapphttp/screens/order/order_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,18 @@ class AppDrawer extends StatelessWidget {
             name: "Cart",
             icon: Icons.shopping_cart,
             route: CartScreen.routeName,
+          ),
+          Divider(),
+          DrawerButton(
+            name: "Edit",
+            icon: Icons.shopping_cart,
+            route: EditProduct.routeName,
+          ),
+          Divider(),
+          DrawerButton(
+            name: "List",
+            icon: Icons.shopping_cart,
+            route: ProductList.routeName,
           ),
           Divider(),
         ],

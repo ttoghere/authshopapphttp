@@ -3,6 +3,7 @@ import 'package:authshopapphttp/providers/order.dart';
 import 'package:authshopapphttp/providers/product.dart';
 import 'package:authshopapphttp/screens/cart/cart_screen.dart';
 import 'package:authshopapphttp/screens/detail/products_detail.dart';
+import 'package:authshopapphttp/screens/edit/edit_product.dart';
 import 'package:authshopapphttp/screens/edit/product_list.dart';
 import 'package:authshopapphttp/screens/home/home_screen.dart';
 import 'package:authshopapphttp/screens/order/order_screen.dart';
@@ -28,7 +29,9 @@ class MyApp extends StatelessWidget {
           ProductsDetail.routeName: (context) => ProductsDetail(),
           CartScreen.routeName: (context) => CartScreen(),
           ProductsOverview.routeName: (context) => ProductsOverview(),
-          OrderScreen.routeName: (context) => OrderScreen()
+          OrderScreen.routeName: (context) => OrderScreen(),
+          EditProduct.routeName: (context) => EditProduct(),
+          ProductList.routeName: (context) => ProductList(),
         },
       ),
     );
