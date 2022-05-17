@@ -1,9 +1,9 @@
-import 'package:authshopapphttp/app_drawer.dart';
-import 'package:authshopapphttp/screens/edit/edit_product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:authshopapphttp/app_drawer.dart';
 import 'package:authshopapphttp/providers/product.dart';
+import 'package:authshopapphttp/screens/edit/edit_product.dart';
 
 class ProductList extends StatelessWidget {
   static const routeName = "/pl";
@@ -30,6 +30,7 @@ class ProductList extends StatelessWidget {
         child: ListView.builder(
           itemCount: prodList.length,
           itemBuilder: (context, index) => ProductTile(
+            id: prodList[index].id,
             title: prodList[index].title,
             imgUrl: prodList[index].imageUrl,
           ),
@@ -40,10 +41,12 @@ class ProductList extends StatelessWidget {
 }
 
 class ProductTile extends StatelessWidget {
+  final String id;
   final String title;
   final String imgUrl;
   const ProductTile({
     Key? key,
+    required this.id,
     required this.title,
     required this.imgUrl,
   }) : super(key: key);
@@ -77,7 +80,8 @@ class ProductTile extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(EditProduct.routeName);
+                    Navigator.of(context)
+                        .pushNamed(EditProduct.routeName, arguments: id);
                   },
                   icon: Icon(
                     Icons.edit,
