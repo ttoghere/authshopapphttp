@@ -8,6 +8,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var productBp = Provider.of<Product>(context, listen: false);
+    var cart = Provider.of<Cart>(context, listen: false);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 1),
@@ -39,17 +40,15 @@ class ProductItem extends StatelessWidget {
               },
             ),
           ),
-          trailing: Consumer<Cart>(
-            builder: (context, cart, child) => IconButton(
-              onPressed: () {
-                cart.addItem(
-                  productId: productBp.id,
-                  price: productBp.price,
-                  title: productBp.title,
-                );
-              },
-              icon: Icon(Icons.shopping_cart_outlined),
-            ),
+          trailing: IconButton(
+            onPressed: () {
+              cart.addItem(
+                productId: productBp.id,
+                price: productBp.price,
+                title: productBp.title,
+              );
+            },
+            icon: Icon(Icons.shopping_cart_outlined),
           ),
           backgroundColor: Colors.black54,
           title: Text(

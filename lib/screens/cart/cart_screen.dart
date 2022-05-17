@@ -1,5 +1,7 @@
 import 'package:authshopapphttp/providers/cart.dart';
+import 'package:authshopapphttp/providers/order.dart';
 import 'package:authshopapphttp/screens/cart/widgets/cart_item.dart';
+import 'package:authshopapphttp/screens/order/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,12 +32,19 @@ class CartScreen extends StatelessWidget {
                   ),
                   Chip(
                     label: Text(
-                      "\$${cartP.totalAmount}",
+                      "\$${cartP.totalAmount.toStringAsFixed(2)}",
                     ),
                     backgroundColor: Colors.red[900],
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<Order>(context, listen: false).addOrder(
+                        cartProducts: cartP.cart.values.toList(),
+                        total: cartP.totalAmount,
+                      );
+                      cartP.clear();
+                      Navigator.of(context).pushNamed(OrderScreen.routeName);
+                    },
                     child: Text("Order Now"),
                   ),
                 ],

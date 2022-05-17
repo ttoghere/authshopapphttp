@@ -1,3 +1,4 @@
+import 'package:authshopapphttp/app_drawer.dart';
 import 'package:authshopapphttp/providers/cart.dart';
 import 'package:authshopapphttp/screens/cart/cart_screen.dart';
 import 'package:authshopapphttp/screens/home/widgets/badge.dart';
@@ -26,6 +27,7 @@ class _ProductsOverviewState extends State<ProductsOverview> {
   Widget build(BuildContext context) {
     var cartProvider = Provider.of<Cart>(context);
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
         centerTitle: true,
         flexibleSpace: BgGradient(),
